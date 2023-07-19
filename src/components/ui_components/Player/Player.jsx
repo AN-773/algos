@@ -69,12 +69,12 @@ export const Player = ({
       />
       <div className="flex justify-center items-center gap-3">
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-          <InputLabel id="demo-simple-select-label">Age</InputLabel>
+          <InputLabel id="demo-simple-select-label">Algorithm</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={selectedAlgorithm}
-            label="Age"
+            label="Algorithm"
             onChange={changeAlgo}
           >
             {algorithms.map((algo, index) => {
