@@ -42,7 +42,7 @@ export default function BFSAlgo({cells, width, height, startIndex, endIndex}) {
   }
 
   this.start = function start() {
-    // let reachedPaths = []
+    let reachedPaths = []
     let cell = cells.find((c) => c.isStart)
     let path = [];
     visitedQueue.push({cell: cell, parent: undefined, length: 1, reached: false});
@@ -59,7 +59,7 @@ export default function BFSAlgo({cells, width, height, startIndex, endIndex}) {
         }
         const snapshot = deepCloneArray(cells)
         frames.push({cells: snapshot, editorLineNumbers: {stack: 0}})
-        // reachedPaths.push(path);
+        reachedPaths.push(path);
         break;
       }
       visitedCells[cell.row][cell.col] = true
@@ -71,7 +71,7 @@ export default function BFSAlgo({cells, width, height, startIndex, endIndex}) {
         visitedQueue.push({cell: neighbor, parent: path, length: path.length + 1})
       }
     }
-    /*cells.forEach((c) => c.visited = false)
+    cells.forEach((c) => c.circleColor = "")
     if (reachedPaths.length === 0) {
       frames.push({cells: deepCloneArray(cells), editorLineNumbers: {stack: 0}})
       return frames
@@ -82,10 +82,13 @@ export default function BFSAlgo({cells, width, height, startIndex, endIndex}) {
       lastPath.unshift(currentPath.cell);
       currentPath = currentPath.parent;
     }
+    let b = 1;
     for (const p of lastPath) {
-      cells[getIndex(p.row, p.col, width)].visited = true
+      cells[getIndex(p.row, p.col, width)].circleColor = "#61dafb"
+      if (b++ % 3 === 0)
+        frames.push({cells: deepCloneArray(cells), editorLineNumbers: {stack: 0}})
     }
-    frames.push({cells: deepCloneArray(cells), editorLineNumbers: {stack: 0}})*/
+    frames.push({cells: deepCloneArray(cells), editorLineNumbers: {stack: 0}})
     return frames;
   }
 }
