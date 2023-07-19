@@ -1,4 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *:after, *:before {
+  margin: 0;
+  /*background-color: rgba(61, 73, 77, 0.3);*/
+}
+
+
+
 body {
+  background-color: #1D2A35 !important;
+  color: rgb(50, 50, 50) !important;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

@@ -1,0 +1,57 @@
+.grid {
+  overflow: hidden;
+  width: fit-content;
+  height: fit-content;
+
+  .row {
+    display: flex;
+  }
+
+  .droppable {
+    border: 2px cadetblue solid !important;
+    background-color: gray;
+  }
+
+  .cell {
+    transition: all 0.5s ease;
+    width: 25px;
+    height: 25px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cell.visited:after{
+    content: '';
+    width: 10px;
+    height: 10px;
+    border: 1px solid #61dafb;
+    border-radius: 50%;
+  }
+
+  .cell.head:after{
+    content: '';
+    width: 10px;
+    height: 10px;
+    border: 1px solid chartreuse;
+    border-radius: 50%;
+  }
+
+  .top-barrier.first-row {
+    border-top: 2px solid rgba(255, 255, 255, 0.7);
+  }
+
+  .bottom-barrier {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+  }
+
+  .left-barrier.first-col {
+    border-left: 2px solid rgba(255, 255, 255, 0.7);
+  }
+
+  .right-barrier {
+    border-right: 2px solid rgba(255, 255, 255, 0.7);
+  }
+}

@@ -1,0 +1,20 @@
+.speed-slider-container {
+  transition: all 0.5s ease;
+}
+.speed-slider-container:hover {
+  #speed-slider {
+    display: block;
+    width: 80px;
+    visibility: visible;
+  }
+}
+
+#speed {
+  margin-left: 12px;
+}
+
+#speed-slider {
+  transition: all 0.5s ease;
+  width: 0;
+  visibility: hidden;
+}
