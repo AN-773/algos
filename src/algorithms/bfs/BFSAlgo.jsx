@@ -63,11 +63,10 @@ export default function BFSAlgo({cells, width, height, startIndex, endIndex}) {
         break;
       }
       visitedCells[cell.row][cell.col] = true
-      cells[getIndex(cell.row, cell.col, width)].visited = true;
-      cells[getIndex(cell.row, cell.col, width)].isHead = true;
+      cells[getIndex(cell.row, cell.col, width)].circleColor = "chartreuse";
       const snapshot = deepCloneArray(cells)
       frames.push({cells: snapshot, editorLineNumbers: {stack: 0}})
-      cells[getIndex(cell.row, cell.col, width)].isHead = false;
+      cells[getIndex(cell.row, cell.col, width)].circleColor = "#61dafb";
       for (const neighbor of getNeighbors(cell.row, cell.col)) {
         visitedQueue.push({cell: neighbor, parent: path, length: path.length + 1})
       }

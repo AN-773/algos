@@ -1,17 +1,19 @@
 import {useState} from "react";
 import Animator from "../../../utiles/Animator";
-import {flushSync} from "react-dom";
 import {Player} from "../../ui_components/Player/Player"
 import useForceUpdate from "../../../utiles/useForceUpdate";
 
-export const FPlayer = ({algorithmManager}) => {
+export const FPlayer = ({algorithms}) => {
 
   console.log("In fplayer comp")
   const forceUpdate = useForceUpdate();
-  const [animator, setAnimator] = useState(new Animator(nextAnimationFrame))
+  const [animator] = useState(new Animator(nextAnimationFrame))
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState(0);
+
+  console.log("State", selectedAlgorithm);
 
   function nextAnimationFrame() {
-    if (algorithmManager.selectNextFrame())
+    if (algorithms[selectedAlgorithm].selectNextFrame())
       forceUpdate()
     else {
       stopAnimation()
@@ -21,7 +23,7 @@ export const FPlayer = ({algorithmManager}) => {
   }
 
   function prevAnimationFrame() {
-    if (algorithmManager.selectPrevFrame())
+    if (algorithms[selectedAlgorithm].selectPrevFrame())
       forceUpdate()
   }
 
@@ -31,7 +33,7 @@ export const FPlayer = ({algorithmManager}) => {
   }
 
   function moveToFrame(index) {
-    if (algorithmManager.selectFrameAt(index))
+    if (algorithms[selectedAlgorithm].selectFrameAt(index))
       forceUpdate()
   }
 
@@ -51,11 +53,16 @@ export const FPlayer = ({algorithmManager}) => {
     forceUpdate()
   }
 
-  algorithmManager.setAlgoDataChangeListener(onDataChange)
+  function changeAlgorithm(index) {
+    algorithms[index].reset();
+    setSelectedAlgorithm(index)
+  }
+
+  algorithms[selectedAlgorithm].setAlgoDataChangeListener(onDataChange)
 
   return (
     <div className={"pt-8"}>
-      {algorithmManager.getComponents()}
+      {algorithms[selectedAlgorithm].getComponents()}
       <Player className={" absolute w-3/6 mb-1 bottom-0 left-1/2 transform -translate-x-1/2"}
               start={startAnimation}
               stop={stopAnimation}
@@ -64,9 +71,12 @@ export const FPlayer = ({algorithmManager}) => {
               changeSpeed={setAnimationSpeed}
               speed={animator.getSpeed()}
               prevFrame={prevAnimationFrame}
-              framesSize={algorithmManager.getFramesSize()}
-              currentFrame={algorithmManager.getCurrentFrameIndex()}
-              playing={animator.isPlaying()}/>
+              framesSize={algorithms[selectedAlgorithm].getFramesSize()}
+              currentFrame={algorithms[selectedAlgorithm].getCurrentFrameIndex()}
+              playing={animator.isPlaying()}
+              algorithms={algorithms}
+              selectedAlgorithm={selectedAlgorithm}
+              changeAlgorithm={changeAlgorithm}/>
     </div>
   )
 

@@ -45,3 +45,11 @@
     transform: rotate(360deg);
   }
 }
+
+*:not(span){
+  color: white !important;
+}
+
+.MuiList-root{
+  background-color: #0D1721;
+}

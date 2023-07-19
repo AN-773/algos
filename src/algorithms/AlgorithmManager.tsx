@@ -8,11 +8,12 @@ export default abstract class AlgorithmManager<FrameType, DataType> {
   private onAlgoDataChangeListener?: () => void
   private currentFrame = 0
 
-  protected constructor(private algo: Algorithm<FrameType, DataType>, userData: DataType) {
-    this.userData = userData;
+  protected constructor(private algo: Algorithm<FrameType, DataType>) {
     this.runAlgorithm = this.runAlgorithm.bind(this)
     this.onUserDataChange = this.onUserDataChange.bind(this)
-    this.runAlgorithm()
+    this.generateData = this.generateData.bind(this)
+    this.userData = this.generateData();
+    this.reset()
   }
 
   private runAlgorithm() {
@@ -24,6 +25,11 @@ export default abstract class AlgorithmManager<FrameType, DataType> {
     this.userData = data;
     this.runAlgorithm()
     this.onAlgoDataChangeListener && this.onAlgoDataChangeListener()
+  }
+
+  reset() {
+    this.userData = this.generateData();
+    this.runAlgorithm()
   }
 
   selectNextFrame() {
@@ -64,5 +70,10 @@ export default abstract class AlgorithmManager<FrameType, DataType> {
 
 
   abstract getComponents(): ReactElement
+
+  abstract getName(): string
+
+  abstract generateData(): DataType
+
 
 }

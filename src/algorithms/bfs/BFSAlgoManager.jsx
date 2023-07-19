@@ -9,10 +9,18 @@ export default class BFSAlgoManager {
   constructor() {
     this.runAlgorithm = this.runAlgorithm.bind(this)
     this.getComponents = this.getComponents.bind(this)
-    this.onDataChange = this.onDataChange.bind(this)
+    this.onUserDataChange = this.onUserDataChange.bind(this)
     this.selectNextFrame = this.selectNextFrame.bind(this)
     this.selectPrevFrame = this.selectPrevFrame.bind(this)
     this.selectFrameAt = this.selectFrameAt.bind(this)
+    this.getFramesSize = this.getFramesSize.bind(this)
+    this.getCurrentFrame = this.getCurrentFrame.bind(this)
+    this.getCurrentFrameIndex = this.getCurrentFrameIndex.bind(this)
+    this.setAlgoDataChangeListener = this.setAlgoDataChangeListener.bind(this)
+    this.reset();
+  }
+
+  reset() {
     this.data = {
       cells: generateMaze(createCells(15, 15, 0, 15 * 15 - 1), 15, 15),
       editorLineNumbers: {stack: 0},
@@ -33,7 +41,7 @@ export default class BFSAlgoManager {
     return (
       <div className={"flex gap-5 justify-between"}>
         <div className={"flex flex-grow justify-center items-center"}>
-          <Grid data={data} onChange={this.onDataChange} className={""}/>
+          <Grid data={data} onChange={this.onUserDataChange} className={""}/>
         </div>
 
       </div>
@@ -65,7 +73,15 @@ export default class BFSAlgoManager {
     return this.frames.length
   }
 
-  onDataChange(newData) {
+  getCurrentFrameIndex() {
+    return this.currentFrame
+  }
+
+  getCurrentFrame() {
+    return this.frames[this.currentFrame]
+  }
+
+  onUserDataChange(newData) {
     this.data = newData;
     this.runAlgorithm();
     this.onDataChangeListner && this.onDataChangeListner();
@@ -77,8 +93,12 @@ export default class BFSAlgoManager {
     this.currentFrame = 0;
   }
 
-  setDataChangeListener(onDataChange) {
+  setAlgoDataChangeListener(onDataChange) {
     this.onDataChangeListner = onDataChange;
+  }
+
+  getName() {
+    return "BFS"
   }
 
 }
