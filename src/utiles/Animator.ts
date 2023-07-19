@@ -1,7 +1,7 @@
 export default class Animator {
   playing = false;
 
-  speed = 200;
+  speed = 100;
 
   lastCallTime: number = 0
 

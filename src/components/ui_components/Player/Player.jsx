@@ -35,7 +35,7 @@ export const Player = ({
   }
 
   return (
-    <div className={className + " gap-5 items-center rounded-xl p-4 bg-[#3D494D4C]"}>
+    <div className={className + " gap-5 items-center rounded-xl p-4 bg-[#3D494D4C] md:w-3/6 w-[96vw] "}>
       <Slider type="range"
               id="frames-slider"
               value={currentFrame}
